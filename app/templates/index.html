@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceLearn</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>VoiceLearn</h1>
+        <p>Offline Voice Learning Assistant</p>
+    </header>
+
+    <main>
+
+        <section class="search-box">
+
+            <h2>What do you want to learn?</h2>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Type a word..."
+            >
+
+            <button onclick="searchWord()">Search</button>
+
+        </section>
+
+
+        <section class="answer-box">
+
+            <h2>Answer</h2>
+
+            <p id="answer">
+                Your answer will appear here.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        async function searchWord() {
+
+            const word =
+                document.getElementById("searchInput").value.trim();
+
+            const answer =
+                document.getElementById("answer");
+
+
+            if (word === "") {
+
+                answer.innerText = "Please enter a word.";
+
+                return;
+            }
+
+
+            try {
+
+                const response = await fetch(
+                    `/api/search?word=${encodeURIComponent(word)}`
+                );
+
+
+                const data = await response.json();
+
+
+                if (data.found) {
+
+                    answer.innerText =
+                        `${data.word} (${data.category})\n\n${data.meaning}`;
+
+                } else {
+
+                    answer.innerText = data.message;
+
+                }
+
+
+            } catch (error) {
+
+                answer.innerText =
+                    "Unable to connect to the VoiceLearn server.";
+
+                console.error(error);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

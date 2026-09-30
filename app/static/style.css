@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f6f8;
+    color: #222;
+}
+
+header {
+    background: #1f4e79;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+main {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.search-box,
+.answer-box {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+}
+
+input {
+    width: 70%;
+    padding: 12px;
+    font-size: 16px;
+}
+
+button {
+    padding: 12px 18px;
+    margin-left: 5px;
+    cursor: pointer;
+}
